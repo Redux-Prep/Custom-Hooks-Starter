@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-export const useForm = initialValue => {
+export const useForm = (initialValue, cb) => {
 	const [
 		values,
 		setValues,
@@ -16,8 +16,14 @@ export const useForm = initialValue => {
             ...initialValue
           });
     };
+
+    const handleSubmit = e => {
+      e.preventDefault();
+      // make some api call
+      cb()
+      };
     
     
-    return [values, handleChanges, clearForm]
+    return [values, handleChanges, clearForm, handleSubmit]
 };
 

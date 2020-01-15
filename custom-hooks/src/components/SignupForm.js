@@ -34,22 +34,19 @@ export default function SignupForm () {
 	// add them to the custom hook
 	// return the necessary pieces from the hook
 	//call the custom hook in your component go get those pieces back
+	const callApiForTheSubmit = () => {};
 	const [
 		values,
 		handleChanges,
 		clearForm,
-	] = useForm({ username: '', email: '' });
+		handleSubmit,
+	] = useForm({ username: '', email: '' }, callApiForTheSubmit);
 
 	// const username = useForm()[0]
 	// const setUsername = useForm()[1]
 	// const handleChanges = useForm()[2]
 	// ^^These do not need to be named the same things as in the hooks
 	// The first one could be const banana
-
-	const handleSubmit = e => {
-		e.preventDefault();
-		// make some api call
-	};
 
 	return (
 		<div p={2} className='form'>
