@@ -1,29 +1,29 @@
-import {useState} from 'react'
+import { useLocalStorage } from './useLocalStorage';
 
-export const useForm = (initialValue, cb) => {
+export const useForm = (key, initialValue, cb) => {
 	const [
 		values,
 		setValues,
-    ] = useState({initialValue});
+	] = useLocalStorage(key, initialValue);
 
-    const handleChanges = e => {
-		setValues({...values, [e.target.name]: e.target.value});
-    };
+	const handleChanges = e => {
+		setValues({ ...values, [e.target.name]: e.target.value });
+	};
 
-    const clearForm = e => {
-      e.preventDefault();
-          setValues({
-            ...initialValue
-          });
-    };
+	const clearForm = e => {
+		e.preventDefault();
+		setValues(...initialValue);
+	};
 
-    const handleSubmit = e => {
-      e.preventDefault();
-      // make some api call
-      cb()
-      };
-    
-    
-    return [values, handleChanges, clearForm, handleSubmit]
+	const handleSubmit = e => {
+		e.preventDefault();
+		cb();
+	};
+
+	return [
+		values,
+		handleChanges,
+		clearForm,
+		handleSubmit,
+	];
 };
-
