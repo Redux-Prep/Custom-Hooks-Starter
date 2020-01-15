@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { useInput } from '../hooks/useInput';
+import { useForm } from '../hooks/useForm';
 
 import Button from '../theme/Button';
 
@@ -35,30 +35,20 @@ export default function SignupForm () {
 	// return the necessary pieces from the hook
 	//call the custom hook in your component go get those pieces back
 	const [
-		username,
-		setUsername,
+		values,
 		handleChanges,
-	] = useInput();
+		clearForm,
+	] = useForm({ username: '', email: '' });
 
-	const [
-		email,
-		setEmail,
-		handleEmailChanges,
-	] = useInput();
-	// const username = useInput()[0]
-	// const setUsername = useInput()[1]
-	// const handleChanges = useInput()[2]
+	// const username = useForm()[0]
+	// const setUsername = useForm()[1]
+	// const handleChanges = useForm()[2]
 	// ^^These do not need to be named the same things as in the hooks
 	// The first one could be const banana
 
 	const handleSubmit = e => {
 		e.preventDefault();
 		// make some api call
-	};
-	const clearForm = e => {
-		e.preventDefault();
-        setUsername('');
-        setEmail('')
 	};
 
 	return (
@@ -70,17 +60,19 @@ export default function SignupForm () {
 						id='outlined-name'
 						label='Username'
 						className={classes.textField}
-						value={username}
+						value={values.username}
+						name='username'
 						onChange={handleChanges}
 						margin='normal'
 						variant='outlined'
 					/>
-                    <TextField
+					<TextField
 						id='outlined-name'
 						label='Email'
 						className={classes.textField}
-						value={email}
-						onChange={handleEmailChanges}
+						value={values.email}
+						name='email'
+						onChange={handleChanges}
 						margin='normal'
 						variant='outlined'
 					/>
